@@ -29,6 +29,7 @@ interface HeaderProps {
   onOpenActiveWeekModal?: () => void;
   onOpenOverviewModal?: () => void;
   onLogoutTeacher?: () => void;
+  onGoToStudentPage?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -43,7 +44,8 @@ export const Header: React.FC<HeaderProps> = ({
   onJumpCurrentWeek,
   onOpenActiveWeekModal,
   onOpenOverviewModal,
-  onLogoutTeacher
+  onLogoutTeacher,
+  onGoToStudentPage
 }) => {
   const isLocked = !!lockState?.isLocked;
 
