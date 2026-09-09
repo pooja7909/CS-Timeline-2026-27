@@ -28,6 +28,7 @@ interface TimelineViewProps {
   lockState?: LockState;
   currentWeekKey: string | null;
   onUpdateCell: (termId: string, weekN: number, yearId: string, updates: Partial<CellData>) => void;
+  onUpdateNote?: (termId: string, weekN: number, note: string) => void;
   onOpenAiHelper?: (cell: {
     termId: string;
     weekN: number;
@@ -54,6 +55,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
   lockState,
   currentWeekKey,
   onUpdateCell,
+  onUpdateNote,
   onOpenAiHelper,
   onOpenAIHelper,
   onEditBreak,
@@ -316,9 +318,10 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
                         <textarea
                           value={cell.text}
                           onChange={(e) => onUpdateCell(term.id, row.n, activeYearId, { text: e.target.value })}
-                          rows={2}
-                          className="w-full text-sm font-sans text-slate-900 bg-transparent border-0 rounded p-1 resize-none focus:bg-white focus:ring-2 focus:ring-indigo-400 focus:outline-hidden leading-relaxed"
-                          placeholder="Enter curriculum topics and learning goals..."
+                          rows={3}
+                          className="w-full text-sm font-sans text-slate-900 bg-white border border-slate-200 hover:border-slate-300 focus:border-indigo-500 rounded-xl p-3 resize overflow-auto focus:bg-white focus:ring-2 focus:ring-indigo-400/30 focus:outline-hidden leading-relaxed min-h-[72px] shadow-2xs"
+                          placeholder="Enter curriculum topics and what will be covered in lesson..."
+                          title="Drag right corner to adjust size"
                         />
                       ) : (
                         <p className="text-sm font-sans text-slate-800 leading-relaxed whitespace-pre-wrap">
@@ -326,12 +329,32 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
                         </p>
                       )}
 
-                      {/* Department notes if present */}
-                      {row.note && (
-                        <div className="mt-3 pt-2 border-t border-slate-100 text-xs text-slate-500 italic flex items-center gap-1.5">
-                          <MessageSquare className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
-                          <span>{row.note}</span>
-                        </div>
+                      {/* Department notes */}
+                      {userRole === 'teacher' && (
+                        isEditable ? (
+                          <div className="mt-3 pt-3 border-t border-slate-100">
+                            <div className="flex items-center justify-between mb-1.5">
+                              <span className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                                <MessageSquare className="w-3.5 h-3.5 text-indigo-600" />
+                                Teacher & Department Notes
+                              </span>
+                              <span className="text-[10px] text-slate-400 font-mono-code">Drag right corner to resize</span>
+                            </div>
+                            <textarea
+                              value={row.note || ''}
+                              onChange={(e) => onUpdateNote && onUpdateNote(term.id, row.n, e.target.value)}
+                              rows={2}
+                              className="w-full text-xs font-sans text-slate-700 bg-slate-50/90 border border-slate-200 hover:border-slate-300 focus:border-indigo-500 rounded-xl p-2.5 resize overflow-auto focus:bg-white focus:ring-2 focus:ring-indigo-400/30 focus:outline-hidden min-h-[58px]"
+                              placeholder="Add teacher department notes, links, resources, or reminders..."
+                              title="Drag right corner to adjust size"
+                            />
+                          </div>
+                        ) : row.note ? (
+                          <div className="mt-3 pt-2 border-t border-slate-100 text-xs text-slate-600 bg-slate-50/70 p-2.5 rounded-lg italic flex items-center gap-2">
+                            <MessageSquare className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                            <span>{row.note}</span>
+                          </div>
+                        ) : null
                       )}
 
                       {/* Teacher Actions */}
