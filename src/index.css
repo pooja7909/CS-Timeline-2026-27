@@ -14,6 +14,23 @@
   }
 }
 
+/* Enhanced corner resizer handle for curriculum textareas */
+textarea.resize {
+  resize: both;
+}
+
+textarea::-webkit-resizer {
+  border-width: 7px;
+  border-style: solid;
+  border-color: transparent #94a3b8 #94a3b8 transparent;
+  cursor: nwse-resize;
+}
+
+textarea:hover::-webkit-resizer,
+textarea:focus::-webkit-resizer {
+  border-color: transparent #6366f1 #6366f1 transparent;
+}
+
 @media print {
   body {
     background: #ffffff !important;
@@ -30,4 +47,5 @@
     page-break-inside: avoid;
   }
 }
+
 
