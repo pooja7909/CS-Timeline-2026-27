@@ -369,8 +369,9 @@ export const MatrixView: React.FC<MatrixViewProps> = ({
                                       value={cell.text}
                                       onChange={(e) => onUpdateCell(term.id, row.n, y.id, { text: e.target.value })}
                                       rows={3}
-                                      className="w-full text-xs font-sans text-slate-900 bg-transparent border-0 rounded p-1 resize-none focus:bg-white focus:ring-2 focus:ring-indigo-400 focus:outline-hidden leading-relaxed"
-                                      placeholder="Add topic..."
+                                      className="w-full text-xs font-sans text-slate-900 bg-white/90 border border-slate-200 hover:border-slate-300 focus:border-indigo-500 rounded-lg p-2 resize overflow-auto focus:bg-white focus:ring-2 focus:ring-indigo-400/30 focus:outline-hidden leading-relaxed min-h-[68px] shadow-2xs"
+                                      placeholder="Add lesson content / topic..."
+                                      title="Drag right corner to adjust size"
                                     />
                                   ) : (
                                     <div className="text-xs font-sans text-slate-800 leading-relaxed whitespace-pre-wrap">
@@ -437,9 +438,10 @@ export const MatrixView: React.FC<MatrixViewProps> = ({
                                 <textarea
                                   value={row.note || ''}
                                   onChange={(e) => onUpdateNote(term.id, row.n, e.target.value)}
-                                  rows={2}
-                                  className="w-full text-[11px] font-sans text-slate-600 bg-transparent border-0 rounded p-1 resize-none focus:bg-white focus:ring-2 focus:ring-indigo-400 focus:outline-hidden"
+                                  rows={3}
+                                  className="w-full text-xs font-sans text-slate-700 bg-white/90 border border-slate-200 hover:border-slate-300 focus:border-indigo-500 rounded-lg p-2 resize overflow-auto focus:bg-white focus:ring-2 focus:ring-indigo-400/30 focus:outline-hidden min-h-[68px] shadow-2xs"
                                   placeholder="Department notes, resources, links..."
+                                  title="Drag right corner to adjust size"
                                 />
                               ) : (
                                 <div className="text-[11px] text-slate-600 italic">
