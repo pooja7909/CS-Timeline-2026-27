@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "CurriculumDocument": {
+      "title": "Curriculum Document",
+      "description": "Central 38-week curriculum timeline and assessment store",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Document ID (typically 'main')"
+        },
+        "plan": {
+          "type": "array",
+          "description": "Full 38-week term data array"
+        },
+        "reportDates": {
+          "type": "array",
+          "description": "Annual report submission and publishing dates"
+        },
+        "lock": {
+          "type": "object",
+          "description": "Lock state (isLocked, hasPin, lockedBy, lockedAt)"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "ISO timestamp of last update"
+        },
+        "version": {
+          "type": "number",
+          "description": "Incremental update version"
+        }
+      },
+      "required": ["id", "plan", "lastUpdated"]
+    }
+  },
+  "firestore": {
+    "/curriculum/{docId}": {
+      "schema": "CurriculumDocument",
+      "description": "Curriculum storage document accessible across all devices"
+    }
+  }
+}

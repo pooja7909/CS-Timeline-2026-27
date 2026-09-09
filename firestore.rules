@@ -1,0 +1,11 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /curriculum/{docId} {
+      // Allow reading so all students, parents and teachers on any device can view latest timeline
+      allow read: if true;
+      // Allow writes so changes made in teacher mode sync directly to Firestore from any device
+      allow write: if true;
+    }
+  }
+}

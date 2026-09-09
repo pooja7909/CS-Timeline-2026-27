@@ -1,0 +1,6 @@
+{
+  "name": "Computing Curriculum Planner 2026-27",
+  "description": "Interactive and synchronized timeline and curriculum planner for the Computing Department (Years 7–13) following the 2026–2027 calendar with locking, search, and student/teacher views.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
