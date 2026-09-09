@@ -13,7 +13,7 @@ let state = {
   },
   plan: JSON.parse(JSON.stringify(INITIAL_PLAN)),
   reportDates: JSON.parse(JSON.stringify(DEFAULT_YEAR_REPORT_DATES)),
-  secretPin: "2026"
+  secretPin: "bis2026"
 };
 
 export default async function handler(req: any, res: any) {
