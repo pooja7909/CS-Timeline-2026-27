@@ -13,7 +13,7 @@ let inMemoryState = {
   },
   plan: JSON.parse(JSON.stringify(INITIAL_PLAN)),
   reportDates: JSON.parse(JSON.stringify(DEFAULT_YEAR_REPORT_DATES)),
-  secretPin: "2026"
+  secretPin: "bis2026"
 };
 
 export default async function handler(req: any, res: any) {
@@ -68,7 +68,8 @@ export default async function handler(req: any, res: any) {
   // Teacher verify
   if (method === 'POST' && url?.includes('/teacher/verify')) {
     const { password } = body || {};
-    if (password === inMemoryState.secretPin || password === '2026') {
+    const inputPwd = typeof password === 'string' ? password.trim() : '';
+    if (inputPwd === inMemoryState.secretPin || inputPwd.toLowerCase() === 'bis2026') {
       return res.status(200).json({ valid: true });
     }
     return res.status(401).json({ valid: false, error: 'Incorrect teacher password.' });
@@ -78,7 +79,8 @@ export default async function handler(req: any, res: any) {
   if (method === 'POST' && url?.includes('/lock')) {
     const { isLocked, pin, currentPin, lockedBy } = body || {};
     if (inMemoryState.lock.isLocked && !isLocked) {
-      if (currentPin !== inMemoryState.secretPin && currentPin !== '2026') {
+      const pinStr = typeof currentPin === 'string' ? currentPin.trim() : '';
+      if (pinStr !== inMemoryState.secretPin && pinStr.toLowerCase() !== 'bis2026') {
         return res.status(401).json({ error: 'Incorrect PIN to unlock timeline.' });
       }
     }
