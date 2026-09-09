@@ -894,6 +894,7 @@ export default function App() {
                   assessOnly={assessOnly}
                   currentWeekKey={currentWeekKey}
                   onUpdateCell={handleUpdateCell}
+                  onUpdateNote={handleUpdateNote}
                   onOpenAiHelper={(cell) => setAiHelperCell(cell)}
                   onEditBreak={handleOpenEditBreak}
                   onDeleteBreak={handleDeleteBreak}
